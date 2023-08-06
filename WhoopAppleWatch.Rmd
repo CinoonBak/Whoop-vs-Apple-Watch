@@ -1,0 +1,364 @@
+---
+title: "Whoop vs Apple Watch"
+author: "Cinoon Bak"
+date: "2023-07-27"
+output: html_document
+---
+
+##Load Library/Data
+```{r}
+library(readxl)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(PairedData)
+library(car)
+library(stats)
+library(lubridate)
+
+whoop <-  read_excel("~/Desktop/Whoop:AppleWatch/Whoop.xlsx")
+apple <-  read_excel("~/Desktop/Whoop:AppleWatch/AppleWatch.xlsx")
+```
+
+##Paried T-Test for Sleep Length
+```{r}
+sleep_length <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                length = c(apple$`Sleep Length`,  whoop$`Sleep Length`))
+
+#Summary Stat 
+sleep_length %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(length),
+            sd = sd(length))
+
+#Boxplot for summary stat
+ggplot(data = sleep_length, aes(x = group, y = length)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_sl <- subset(sleep_length,  group == "apple", length,
+                 drop = TRUE)
+
+whoop_sl <- subset(sleep_length,  group == "whoop", length,
+                 drop = TRUE)
+
+pd <- paired(apple_sl, whoop_sl)
+plot(pd, type = "profile") + theme_bw()
+
+#paired t-test
+t.test(apple_sl, whoop_sl, paired = TRUE)
+```
+
+##Paired T-Test for REM Sleep 
+```{r}
+rem_sleep <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                length = c(apple$`REM Sleep`,  whoop$`REM Sleep`))
+
+#Summary Stat 
+rem_sleep %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(length),
+            sd = sd(length))
+
+#Boxplot for summary stat
+ggplot(data = rem_sleep, aes(x = group, y = length)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_rem <- subset(rem_sleep,  group == "apple", length,
+                 drop = TRUE)
+
+whoop_rem <- subset(rem_sleep,  group == "whoop", length,
+                 drop = TRUE)
+
+pd <- paired(apple_rem, whoop_rem)
+plot(pd, type = "profile") + theme_bw()
+
+#Paired t-test
+t.test(apple_rem, whoop_rem, paired = TRUE)
+```
+
+##Paired T-Test for Deep Sleep
+```{r}
+deep_sleep <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                length = c(apple$`Deep Sleep`,  whoop$`Deep Sleep`))
+
+#Summary Stat 
+deep_sleep %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(length),
+            sd = sd(length))
+
+#Boxplot for summary stat
+ggplot(data = deep_sleep, aes(x = group, y = length)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_deep <- subset(deep_sleep,  group == "apple", length,
+                 drop = TRUE)
+
+whoop_deep <- subset(deep_sleep,  group == "whoop", length,
+                 drop = TRUE)
+
+pd <- paired(apple_deep, whoop_deep)
+plot(pd, type = "profile") + theme_bw()
+
+#Paired t-test
+t.test(apple_deep, whoop_deep, paired = TRUE)
+```
+
+##Paired T-Test for Light Sleep
+```{r}
+light_sleep <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                length = c(apple$`Light Sleep`,  whoop$`Light Sleep`))
+
+#Summary Stat 
+light_sleep %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(length),
+            sd = sd(length))
+
+#Boxplot for summary stat
+ggplot(data = light_sleep, aes(x = group, y = length)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_light <- subset(light_sleep,  group == "apple", length,
+                 drop = TRUE)
+
+whoop_light <- subset(light_sleep,  group == "whoop", length,
+                 drop = TRUE)
+
+pd <- paired(apple_light, whoop_light)
+plot(pd, type = "profile") + theme_bw()
+
+#Paired t-test
+t.test(apple_light, whoop_light, paired = TRUE)
+```
+
+##Paired T-Test for Awake
+```{r}
+awake <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                length = c(apple$`Awake`,  whoop$`Awake`))
+
+#Summary Stat 
+awake %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(length),
+            sd = sd(length))
+
+#Boxplot for summary stat
+ggplot(data = awake, aes(x = group, y = length)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_awake <- subset(awake,  group == "apple", length,
+                 drop = TRUE)
+
+whoop_awake <- subset(awake,  group == "whoop", length,
+                 drop = TRUE)
+
+pd <- paired(apple_awake, whoop_awake)
+plot(pd, type = "profile") + theme_bw()
+
+#Paired t-test
+t.test(apple_awake, whoop_awake, paired = TRUE)
+```
+
+##Paired T-Test for HRV
+```{r}
+hrv <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                length = c(apple$`HRV`,  whoop$`HRV`))
+
+#Summary Stat 
+hrv %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(length),
+            sd = sd(length))
+
+#Boxplot for summary stat
+ggplot(data = hrv, aes(x = group, y = length)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_hrv <- subset(hrv,  group == "apple", length,
+                 drop = TRUE)
+
+whoop_hrv <- subset(hrv,  group == "whoop", length,
+                 drop = TRUE)
+
+pd <- paired(apple_hrv, whoop_hrv)
+plot(pd, type = "profile") + theme_bw()
+
+#Paired t-test
+t.test(apple_hrv, whoop_hrv, paired = TRUE)
+```
+
+##Paired T-Test for Respitory Rate
+```{r}
+rr <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                length = c(apple$`Respiratory Rate`,  whoop$`Respiratory Rate`))
+
+#Summary Stat 
+rr %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(length),
+            sd = sd(length))
+
+#Boxplot for summary stat
+ggplot(data = rr, aes(x = group, y = length)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_rr <- subset(rr,  group == "apple", length,
+                 drop = TRUE)
+
+whoop_rr <- subset(rr,  group == "whoop", length,
+                 drop = TRUE)
+
+pd <- paired(apple_rr, whoop_rr)
+plot(pd, type = "profile") + theme_bw()
+
+#Paired t-test
+t.test(apple_rr, whoop_rr, paired = TRUE)
+```
+
+##Paired T-Test for Day Total Calories Burned
+```{r}
+total_cal <- data.frame(group = rep(c("apple", "whoop"), each = 53),
+                cal = c(apple$`Day Total Calories Burned`,  whoop$`Day Total Calories Burned`))
+
+#Summary Stat 
+total_cal %>%
+  group_by(group) %>%
+  summarise(count = n(),
+            mean = mean(cal, na.rm = TRUE),
+            sd = sd(cal, na.rm = TRUE))
+
+#Boxplot for summary stat
+ggplot(data = total_cal, aes(x = group, y = cal)) + geom_boxplot() + scale_fill_brewer(palette = "Accent") 
+
+#Plot Paired Data
+apple_tc <- subset(total_cal,  group == "apple", cal,
+                 drop = TRUE)
+
+whoop_tc <- subset(total_cal,  group == "whoop", cal,
+                 drop = TRUE)
+
+#Paired t-test
+t.test(apple_tc, whoop_tc, paired = TRUE)
+```
+
+##Type of workout paired t-test
+```{r}
+apple_tow_df <- apple %>%
+  rowwise() %>%
+  mutate(`Type of Workout` = paste(str_split(`Type of Workout`, ',')[[1]][1], collapse = '')) %>%
+  mutate(`Calories Burned Workout` = paste(str_split(`Calories Burned Workout`, ',')[[1]][1], collapse = '')) %>%
+  dplyr::select(`Calories Burned Workout`, `Categories of Exercise`) %>%
+  mutate(tracker = 'Apple Watch') %>%
+  subset(`Categories of Exercise` != 0)
+
+#make df for just strength trainer calories
+whoop_tow_df <- whoop %>%
+  rowwise() %>%
+  mutate(`Type of Workout` = paste(str_split(`Type of Workout`, ',')[[1]][1], collapse = '')) %>%
+  mutate(`Calories Burned Workout` = paste(str_split(`Calories Burned Workout`, ',')[[1]][1], collapse = '')) %>%
+  dplyr::select(`Calories Burned Workout`, `Categories of Exercise`) %>%
+  mutate(tracker = 'Whoop') %>%
+  subset(`Categories of Exercise` != 0)
+
+#merge two new dataframes
+tow_test <- rbind(apple_tow_df, whoop_tow_df)
+str(tow_test)
+tow_test$`Calories Burned Workout` <- as.numeric(tow_test$`Calories Burned Workout`)
+tow_test$`Categories of Exercise` <- as.character(tow_test$`Categories of Exercise`)
+
+tow_1 <- tow_test %>%
+  subset(`Categories of Exercise` == "1") %>%
+  select(`Calories Burned Workout`, tracker)
+
+tow_2 <- tow_test %>%
+  subset(`Categories of Exercise` == "2") %>%
+  select(`Calories Burned Workout`, tracker)
+
+tow_3 <- tow_test %>%
+  subset(`Categories of Exercise` == "3") %>%
+  select(`Calories Burned Workout`, tracker)
+
+
+#get the difference between whoop and apple watch and run t-test for tow_2
+apple_tow_1 <- subset(tow_1,  tracker == "Apple Watch", `Calories Burned Workout`,
+                 drop = TRUE)
+
+whoop_tow_1 <- subset(tow_1,  tracker == "Whoop", `Calories Burned Workout`,
+                 drop = TRUE)
+
+t.test(apple_tow_1, whoop_tow_1, paired = TRUE)
+
+#get the difference between whoop and apple watch and run t-test for tow_2
+apple_tow_2 <- subset(tow_2,  tracker == "Apple Watch", `Calories Burned Workout`,
+                 drop = TRUE)
+
+whoop_tow_2 <- subset(tow_2,  tracker == "Whoop", `Calories Burned Workout`,
+                 drop = TRUE)
+
+t.test(apple_tow_2, whoop_tow_2, paired = TRUE)
+
+#get the difference between whoop and apple watch and run t-test for tow_3
+apple_tow_3 <- subset(tow_3,  tracker == "Apple Watch", `Calories Burned Workout`,
+                 drop = TRUE)
+
+whoop_tow_3 <- subset(tow_3,  tracker == "Whoop", `Calories Burned Workout`,
+                 drop = TRUE)
+
+t.test(apple_tow_3, whoop_tow_3, paired = TRUE)
+
+mean(apple_tow_1) #433.44
+mean(whoop_tow_1) #242.1
+mean(apple_tow_2) #379.44
+mean(whoop_tow_2) #217.67
+mean(apple_tow_3) #306.6
+mean(whoop_tow_3) #310.4
+
+
+```
+
+##Proportion of sleep
+```{r}
+apple_sleep_pro <- apple %>%
+  summarise(rem = mean(`REM Sleep Proportion`),
+            deep = mean(`Deep Sleep Proportion`),
+            light = mean(`Light Sleep Proportion`),
+            awake = mean(`Awake Proportion`))
+
+whoop_sleep_pro <- whoop %>%
+  summarise(rem = mean(`REM Sleep Proportion`),
+            deep = mean(`Deep Sleep Proportion`),
+            light = mean(`Light Sleep Proportion`),
+            awake = mean(`Awake Proportion`))
+
+a <- data.frame(Category = c("REM", "REM", "Deep","Deep","Light","Light","Awake","Awake"),
+                Proportion = c(apple_sleep_pro$rem, whoop_sleep_pro$rem, apple_sleep_pro$deep, whoop_sleep_pro$deep, apple_sleep_pro$light,whoop_sleep_pro$light, apple_sleep_pro$awake, whoop_sleep_pro$awake),
+                Tracker = c("Apple Watch","Whoop"))
+
+ggplot(a, aes(x=Category, y = Proportion, fill= Tracker)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_text(aes(label=round(Proportion,2)), position=position_dodge(width=0.9), vjust=-0.25)
+
+z <- apple %>%
+  summarise(mean = mean(HRV),
+            sd = sd(HRV))
+
+y<- whoop %>%
+  summarise(mean = mean(HRV),
+            sd = sd(HRV))
+
+x <- data.frame(Measure = c("Mean", "Mean", "Standard Deviation", "Standard Deviation"),
+                Number = c(z$mean, y$mean, z$sd, y$sd),
+                Tracker = c("Apple Watch", "Whoop"))
+
+ggplot(x, aes(x=Measure, y = Number, fill= Tracker)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_text(aes(label=round(Number,2)), position=position_dodge(width=0.9), vjust=-0.25)
+```
