@@ -19,7 +19,7 @@ R Studio Version: 2023.06.0+421
 * HRV was significantly different from Apple Watch to Whoop
 * Respiratory rate was not significantly different from Apple Watch to Whoop
 
-![sleep stage](https://github.com/CinoonBak/Whoop-vs-Apple-Watch/assets/118776460/135a05f8-754d-4857-9cef-9fede89c44d3)
+<img width="694" alt="hrv" src="https://github.com/CinoonBak/Whoop-vs-Apple-Watch/assets/118776460/85d4b379-03a3-46d1-a849-42e4ac864f40">
 
 # Comparing Burned Calories
 * Day total burned calories were significantly different from Apple Watch to Whoop
